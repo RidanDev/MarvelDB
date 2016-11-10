@@ -1,4 +1,4 @@
-package com.example.gianlucanadirvillalba.marvel_db;
+package com.example.gianlucanadirvillalba.marvel_db.pojo;
 
 /**
  * Created by gianlucanadirvillalba on 09/11/2016.
