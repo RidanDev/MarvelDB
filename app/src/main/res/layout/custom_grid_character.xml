@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@android:color/black">
+
+    <ImageView
+        android:id="@+id/character_grid_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_launcher"/>
+
+    <!--android:scaleType="fitXY"-->
+
+
+    <!--TextView
+        android:id="@+id/character_grid_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/character_grid_image"
+        android:gravity="center"
+        android:text="character"/-->
+
+    <TextView
+        android:id="@+id/character_grid_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/character_grid_image"
+        android:layout_centerHorizontal="true"
+        android:text="character"/>
+
+        <!--android:layout_marginTop="20dp"-->
+</RelativeLayout>
+    

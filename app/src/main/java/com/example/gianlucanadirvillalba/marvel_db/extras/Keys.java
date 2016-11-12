@@ -13,6 +13,11 @@ public class Keys
         String KEY_ID = "id";
         String KEY_NAME = "name";
         String KEY_DESCRIPTION = "description";
+        String KEY_THUMBNAIL = "thumbnail";
+        String KEY_PATH = "path";
+        String KEY_EXTENSION = "extension";
+        String KEY_COMICS = "comics";
+        String KEY_AVAILABLE = "available";
 
     }
 }

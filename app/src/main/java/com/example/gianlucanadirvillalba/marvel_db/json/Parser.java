@@ -2,6 +2,7 @@ package com.example.gianlucanadirvillalba.marvel_db.json;
 
 import android.widget.Toast;
 
+import com.example.gianlucanadirvillalba.marvel_db.extras.Constants;
 import com.example.gianlucanadirvillalba.marvel_db.extras.MyApplication;
 import com.example.gianlucanadirvillalba.marvel_db.pojo.SuperHero;
 
@@ -11,11 +12,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static com.example.gianlucanadirvillalba.marvel_db.extras.Keys.EndPointsSuperHeroes.KEY_AVAILABLE;
 import static com.example.gianlucanadirvillalba.marvel_db.extras.Keys.EndPointsSuperHeroes.KEY_CHARACTERS;
+import static com.example.gianlucanadirvillalba.marvel_db.extras.Keys.EndPointsSuperHeroes.KEY_COMICS;
 import static com.example.gianlucanadirvillalba.marvel_db.extras.Keys.EndPointsSuperHeroes.KEY_DATA;
 import static com.example.gianlucanadirvillalba.marvel_db.extras.Keys.EndPointsSuperHeroes.KEY_DESCRIPTION;
+import static com.example.gianlucanadirvillalba.marvel_db.extras.Keys.EndPointsSuperHeroes.KEY_EXTENSION;
 import static com.example.gianlucanadirvillalba.marvel_db.extras.Keys.EndPointsSuperHeroes.KEY_ID;
 import static com.example.gianlucanadirvillalba.marvel_db.extras.Keys.EndPointsSuperHeroes.KEY_NAME;
+import static com.example.gianlucanadirvillalba.marvel_db.extras.Keys.EndPointsSuperHeroes.KEY_PATH;
+import static com.example.gianlucanadirvillalba.marvel_db.extras.Keys.EndPointsSuperHeroes.KEY_THUMBNAIL;
 
 /**
  * Created by gianlucanadirvillalba on 10/11/2016.
@@ -41,6 +47,7 @@ public class Parser
                     String name = "NA";
                     String description = "NA";
                     String imagePath = "NA";
+                    String imageType = "";
 
                     JSONObject currentCharacter = array.getJSONObject(i);
                     if (Utils.contains(currentCharacter, KEY_ID))
@@ -50,18 +57,27 @@ public class Parser
                     if (Utils.contains(currentCharacter, KEY_DESCRIPTION))
                         description = currentCharacter.getString(KEY_DESCRIPTION);
 
-                    imagePath = (String) currentCharacter.getJSONObject("thumbnail").get("path");
-//                  comicsNumber = (int) currentCharacter.getJSONObject("comics").get("available");
+                    imagePath = (String) currentCharacter.getJSONObject(KEY_THUMBNAIL).get(KEY_PATH);
+                    //TODO posso creare un impostazione per decidere se visualizzare anche
+                    // i personaggi che non hanno un immagine, che di default non mostro
 
-                    SuperHero superHero = new SuperHero();
-                    superHero.setId(id);
-                    superHero.setName(name);
-                    superHero.setDescription(description);
-                    superHero.setImagePath(imagePath+"/portrait_uncanny.jpg"); //portrait_fantastic
-                    superHero.setComicsNumber(comicsNumber);
+                    if (!(imagePath.equals(Constants.IMAGE_NOT_FOUND_1)
+                            || imagePath.equals(Constants.IMAGE_NOT_FOUND_2)))
+                    {
+                        imageType = Constants.DOT + (String) currentCharacter.getJSONObject(KEY_THUMBNAIL).get(KEY_EXTENSION);
+                        comicsNumber = (int) currentCharacter.getJSONObject(KEY_COMICS).get(KEY_AVAILABLE);
 
-                    //if (id != -1 && !name.equals("NA"))
+                        SuperHero superHero = new SuperHero();
+                        superHero.setId(id);
+                        superHero.setName(name);
+                        superHero.setDescription(description);
+                        superHero.setImagePath(imagePath + Constants.PORTRAIT_UNCANNY + imageType); //portrait_fantastic/
+                        superHero.setComicsNumber(comicsNumber);
+
+                        //if (id != -1 && !name.equals("NA"))
                         charactersList.add(superHero);
+                    }
+
 
                 }
             } catch (JSONException e)

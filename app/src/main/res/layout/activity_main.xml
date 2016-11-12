@@ -15,24 +15,27 @@
             android:id="@+id/app_bar"
             layout="@layout/app_bar"/>
 
-        <android.support.v7.widget.RecyclerView
+        <!--android.support.v7.widget.RecyclerView
             android:id="@+id/charactersList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/app_bar">
-        </android.support.v7.widget.RecyclerView>
+        <android.support.v7.widget.RecyclerView-->
 
-        <!--GridView
+        <GridView
             android:id="@+id/grid_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/app_bar"
+            android:columnWidth="110dp"
             android:numColumns="auto_fit"
-            android:horizontalSpacing="10dp"
-            android:columnWidth="120dp"
-            android:stretchMode="spacingWidthUniform">
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:stretchMode="spacingWidthUniform"
+            android:verticalSpacing="30dp">
 
-        </GridView-->
+        </GridView>
+        <!--android:horizontalSpacing="10dp"-->
 
     </RelativeLayout>
 
