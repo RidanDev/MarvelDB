@@ -22,6 +22,18 @@
             android:layout_below="@id/app_bar">
         </android.support.v7.widget.RecyclerView>
 
+        <!--GridView
+            android:id="@+id/grid_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/app_bar"
+            android:numColumns="auto_fit"
+            android:horizontalSpacing="10dp"
+            android:columnWidth="120dp"
+            android:stretchMode="spacingWidthUniform">
+
+        </GridView-->
+
     </RelativeLayout>
 
     <fragment

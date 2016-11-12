@@ -7,18 +7,21 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.gianlucanadirvillalba.marvel_db.R;
 import com.example.gianlucanadirvillalba.marvel_db.adapters.CharactersAdapter;
 import com.example.gianlucanadirvillalba.marvel_db.fragments.NavigationDrawerFragment;
+import com.example.gianlucanadirvillalba.marvel_db.json.EndPoints;
+import com.example.gianlucanadirvillalba.marvel_db.json.Parser;
 import com.example.gianlucanadirvillalba.marvel_db.network.VolleySingleton;
 import com.example.gianlucanadirvillalba.marvel_db.pojo.SuperHero;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +30,10 @@ public class MainActivity extends AppCompatActivity
 {
     private Toolbar mToolbar;
     private RecyclerView mRecyclerView;
-
-    public static final String URL_MARVEL_REQUEST =
-            "https://gateway.marvel.com/v1/public/characters?&ts=1&apikey=db1112584ea107626ad221639a9829bd&hash=763c3ded3ae7a339024d877a5c25068e";
+    private List<SuperHero> mCharactersList = new ArrayList<>();
+    private RequestQueue mRequestQueue;
+    private CharactersAdapter mAdapter;
+    //private GridView mGridView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -54,21 +58,24 @@ public class MainActivity extends AppCompatActivity
 
     private void setUpRecyclerView()
     {
-        CharactersAdapter adapter = new CharactersAdapter(this, getData());
+        mAdapter = new CharactersAdapter(this);
+        //mGridView = (GridView) findViewById(R.id.grid_view);
         mRecyclerView = (RecyclerView) findViewById(R.id.charactersList);
-        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
-
+    //TODO gestire caricamento degli altri personaggi dopo i primi 20 della lista
     private void setUpRequest()
     {
-        RequestQueue requestQueue = VolleySingleton.getsInstance().getRequestQueue();
-        StringRequest request = new StringRequest(Request.Method.GET, URL_MARVEL_REQUEST, new Response.Listener<String>()
+        mRequestQueue= VolleySingleton.getInstance().getRequestQueue();
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
+                EndPoints.getRequestUrl(20), (String) null, new Response.Listener<JSONObject>()
         {
             @Override
-            public void onResponse(String response)
+            public void onResponse(JSONObject response)
             {
-                Toast.makeText(MainActivity.this, response, Toast.LENGTH_LONG).show();
+                mCharactersList = Parser.parseJsonCharacters(response);
+                mAdapter.setData(mCharactersList);
             }
         }, new Response.ErrorListener()
         {
@@ -78,8 +85,7 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
-        requestQueue.add(request);
-
+        mRequestQueue.add(request);
     }
 
     @Override
@@ -87,18 +93,5 @@ public class MainActivity extends AppCompatActivity
     {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }
-
-    private List<SuperHero> getData()
-    {
-        List<SuperHero> list = new ArrayList<>();
-        for (int i = 0; i < 20; i++)
-        {
-            SuperHero superHero = new SuperHero();
-            superHero.setImage(R.mipmap.ic_launcher);
-            superHero.setName("Iron Man");
-            list.add(superHero);
-        }
-        return list;
     }
 }

@@ -8,7 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.example.gianlucanadirvillalba.marvel_db.R;
+import com.example.gianlucanadirvillalba.marvel_db.network.VolleySingleton;
 import com.example.gianlucanadirvillalba.marvel_db.pojo.SuperHero;
 
 import java.util.Collections;
@@ -22,11 +25,20 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Ch
 {
     private LayoutInflater mLayoutInflater;
     private List<SuperHero> data = Collections.emptyList();
+    private ImageLoader imageLoader;
+    private VolleySingleton volleySingleton;
 
-    public CharactersAdapter(Context context, List<SuperHero> data)
+    public CharactersAdapter(Context context)
     {
         mLayoutInflater = mLayoutInflater.from(context);
+        volleySingleton = VolleySingleton.getInstance();
+        imageLoader = volleySingleton.getImageLoader();
+    }
+
+    public void setData(List<SuperHero> data)
+    {
         this.data = data;
+        notifyItemRangeChanged(0, data.size());
     }
 
     @Override
@@ -38,11 +50,28 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Ch
     }
 
     @Override
-    public void onBindViewHolder(CharactersHolder holder, int position)
+    public void onBindViewHolder(final CharactersHolder holder, int position)
     {
         SuperHero superHero = data.get(position);
-        holder.imageView.setImageResource(superHero.getImage());
         holder.textView.setText(superHero.getName());
+        String imagePath = superHero.getImagePath();
+        if (imagePath != null)
+        {
+            imageLoader.get(imagePath, new ImageLoader.ImageListener()
+            {
+                @Override
+                public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate)
+                {
+                    holder.imageView.setImageBitmap(response.getBitmap());
+                }
+
+                @Override
+                public void onErrorResponse(VolleyError error)
+                {
+
+                }
+            });
+        }
     }
 
     @Override

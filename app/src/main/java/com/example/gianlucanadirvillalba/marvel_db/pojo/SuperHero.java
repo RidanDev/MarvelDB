@@ -6,27 +6,40 @@ package com.example.gianlucanadirvillalba.marvel_db.pojo;
 public class SuperHero
 {
     private String name;
-    private int image;
-
-    public int getImage()
-    {
-        return image;
-    }
+    private String description;
+    private String imagePath;
+    private long id;
+    private int comicsNumber;
 
     public String getName()
     {
         return name;
     }
 
+    public String getImagePath() {return imagePath;}
+
     public void setName(String name)
     {
         this.name = name;
     }
 
-    public void setImage(int image)
+    public void setId(long id)
     {
-        this.image = image;
+        this.id = id;
     }
 
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
 
+    public void setImagePath(String imagePath)
+    {
+        this.imagePath = imagePath;
+    }
+
+    public void setComicsNumber(int comicsNumber)
+    {
+        this.comicsNumber = comicsNumber;
+    }
 }
