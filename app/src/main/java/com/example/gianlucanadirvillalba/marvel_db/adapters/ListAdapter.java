@@ -21,14 +21,14 @@ import java.util.List;
  * Created by gianlucanadirvillalba on 09/11/2016.
  */
 
-public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.CharactersHolder>
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.CharactersHolder>
 {
     private LayoutInflater mLayoutInflater;
     private List<SuperHero> data = Collections.emptyList();
     private ImageLoader imageLoader;
     private VolleySingleton volleySingleton;
 
-    public CharactersAdapter(Context context)
+    public ListAdapter(Context context)
     {
         mLayoutInflater = mLayoutInflater.from(context);
         volleySingleton = VolleySingleton.getInstance();

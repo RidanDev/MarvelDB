@@ -36,7 +36,7 @@ public class Parser
         {
             try
             {
-                Toast.makeText(MyApplication.getAppContext(), "Response", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MyApplication.getAppContext(), "Response", Toast.LENGTH_SHORT).show();
                 JSONObject jsonObject = response.getJSONObject(KEY_DATA);
                 JSONArray array = (JSONArray) jsonObject.get(KEY_CHARACTERS);
                 //TODO gestire i vari controlli
@@ -58,14 +58,15 @@ public class Parser
                         description = currentCharacter.getString(KEY_DESCRIPTION);
 
                     imagePath = (String) currentCharacter.getJSONObject(KEY_THUMBNAIL).get(KEY_PATH);
+                    comicsNumber = (int) currentCharacter.getJSONObject(KEY_COMICS).get(KEY_AVAILABLE);
                     //TODO posso creare un impostazione per decidere se visualizzare anche
-                    // i personaggi che non hanno un immagine, che di default non mostro
+                    // i personaggi che non hanno un immagine, che di default non mostro o quelli con comicsNum = 0
 
                     if (!(imagePath.equals(Constants.IMAGE_NOT_FOUND_1)
-                            || imagePath.equals(Constants.IMAGE_NOT_FOUND_2)))
+                            || imagePath.equals(Constants.IMAGE_NOT_FOUND_2)
+                            || comicsNumber == 0))
                     {
                         imageType = Constants.DOT + (String) currentCharacter.getJSONObject(KEY_THUMBNAIL).get(KEY_EXTENSION);
-                        comicsNumber = (int) currentCharacter.getJSONObject(KEY_COMICS).get(KEY_AVAILABLE);
 
                         SuperHero superHero = new SuperHero();
                         superHero.setId(id);
@@ -77,15 +78,12 @@ public class Parser
                         //if (id != -1 && !name.equals("NA"))
                         charactersList.add(superHero);
                     }
-
-
                 }
             } catch (JSONException e)
             {
                 e.printStackTrace();
                 Toast.makeText(MyApplication.getAppContext(), "No Server Response", Toast.LENGTH_SHORT).show();
             }
-
         }
         return charactersList;
     }

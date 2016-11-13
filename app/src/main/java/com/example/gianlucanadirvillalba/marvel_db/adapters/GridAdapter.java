@@ -42,7 +42,13 @@ public class GridAdapter extends BaseAdapter
     {
         this.data = data;
         notifyDataSetChanged();
-        //notifyItemRangeChanged(0, data.size());
+    }
+
+    public void addNewData(List<SuperHero> newData)
+    {
+        for (int i = 0; i < newData.size(); i++)
+            data.add(newData.get(i));
+        notifyDataSetChanged();
     }
 
     @Override
@@ -75,14 +81,17 @@ public class GridAdapter extends BaseAdapter
             myView = mLayoutInflater.inflate(R.layout.custom_grid_character, viewGroup, false);
             holder = new ViewHolder(myView);
             myView.setTag(holder);
-        } else
+        }
+        else
         {
             holder = (ViewHolder) myView.getTag();
         }
         final SuperHero superHero = data.get(i);
         //TODO controllo stringa da ottimizzare
         String s = superHero.getName();
-        if (s.length() > 13) s = s.substring(0, 13) + "...";
+        //if (s.contains("(")) s = s.substring(0, s.indexOf("("));
+        //if (s.contains("/")) s = s.substring(0, s.indexOf("/"));
+        if (s.length() > 13 ) s = s.substring(0, 13) + ".."; //13 senza il controllo delle parentesi
         holder.textView.setText(s);
 
         //holder.textView.setText(superHero.getName());
@@ -101,7 +110,7 @@ public class GridAdapter extends BaseAdapter
                 @Override
                 public void onErrorResponse(VolleyError error)
                 {
-                    Toast.makeText(mContext, "No image for: " + superHero.getName(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "No image for: " + superHero.getName(), Toast.LENGTH_LONG).show();
                 }
             });
         }
