@@ -1,5 +1,6 @@
 package com.example.gianlucanadirvillalba.marvel_db.activities;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -8,10 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.AbsListView;
 import android.widget.GridView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -42,9 +45,13 @@ public class MainActivity extends AppCompatActivity
     private ListAdapter mAdapter;
     private GridAdapter mGridAdapter;
     private GridView mGridView;
-    private Snackbar mSnackbar;
+    private Snackbar mLoadSnackbar;
+    private Snackbar mNoServerSnackbar;
+    private Snackbar mFullSnackbar;
     private int mPageCount;
     private boolean isScrolled = true;
+    private boolean isFull;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -77,7 +84,10 @@ public class MainActivity extends AppCompatActivity
         mGridView.setOnScrollListener(new AbsListView.OnScrollListener()
         {
             @Override
-            public void onScrollStateChanged(AbsListView absListView, int i) {}
+            public void onScrollStateChanged(AbsListView absListView, int scrollState)
+            {
+
+            }
 
             @Override
             public void onScroll(AbsListView absListView, int firstItem, int visibleItemCount, int totalItems)
@@ -88,13 +98,9 @@ public class MainActivity extends AppCompatActivity
                 if (total == totalItems && isScrolled)
                 {
                     //Toast.makeText(MainActivity.this, "Loading Superheroes", Toast.LENGTH_SHORT).show();
-                    mSnackbar = Snackbar.make(mGridView, "Loading Superheroes", Snackbar.LENGTH_INDEFINITE);
-                    Snackbar.SnackbarLayout snackbarView = (Snackbar.SnackbarLayout) mSnackbar.getView();
-                    snackbarView.setBackgroundColor(ContextCompat.getColor(
-                            MyApplication.getAppContext(), R.color.colorPrimaryDark));
-                    snackbarView.addView(new ProgressBar(MyApplication.getAppContext()));
-                    mSnackbar.show();
-                    setUpRequest(100, mPageCount * 100);
+                    setLoadSnackbar();
+                    if (mPageCount > 0) mLoadSnackbar.show();
+                    setUpRequest(15, mPageCount * 15); //15
                     isScrolled = false;
                 }
             }
@@ -104,7 +110,6 @@ public class MainActivity extends AppCompatActivity
         //mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    //TODO gestire caricamento degli altri personaggi dopo i primi X della lista
     private void setUpRequest(int limit, int offset)
     {
         mRequestQueue = VolleySingleton.getInstance().getRequestQueue();
@@ -115,27 +120,32 @@ public class MainActivity extends AppCompatActivity
             public void onResponse(JSONObject response)
             {
                 mCharactersList = Parser.parseJsonCharacters(response);
+                if (mCharactersList.isEmpty())
+                {
+                    isScrolled = false;
+                    mLoadSnackbar.dismiss();
+                    isFull = true;
+                } else isScrolled = true;
+
                 //mAdapter.setData(mCharactersList);
                 if (mPageCount == 0)
                 {
                     mGridAdapter.setData(mCharactersList);
-                    mSnackbar.dismiss();
-                }
-                else
+                    mLoadSnackbar.dismiss();
+                } else
                 {
                     mGridAdapter.addNewData(mCharactersList);
-                    mSnackbar.dismiss();
+                    mLoadSnackbar.dismiss();
                 }
                 mPageCount++;
-                isScrolled = true;
             }
         }, new Response.ErrorListener()
         {
             @Override
             public void onErrorResponse(VolleyError error)
             {
-                Toast.makeText(MainActivity.this, "No server response (main)", Toast.LENGTH_LONG).show();
-                mSnackbar.dismiss();
+                mLoadSnackbar.dismiss();
+                setNoServerSnackbar();
             }
         });
         mRequestQueue.add(request);
@@ -148,4 +158,58 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        int id = item.getItemId();
+        if (id == R.id.refresh)
+        {
+            if (!isFull)
+            {
+                mLoadSnackbar.show();
+                setUpRequest(15, mPageCount * 15);
+            } else setFullSnackbar();
+        }
+        return true;
+    }
+
+    private void setLoadSnackbar()
+    {
+        mLoadSnackbar = Snackbar.make(mGridView, "Loading Superheroes", Snackbar.LENGTH_INDEFINITE);
+        Snackbar.SnackbarLayout snackbarView = (Snackbar.SnackbarLayout) mLoadSnackbar.getView();
+        snackbarView.setBackgroundColor(ContextCompat.getColor(
+                MyApplication.getAppContext(), R.color.colorPrimaryDark));
+        snackbarView.addView(new ProgressBar(MyApplication.getAppContext()));
+    }
+
+    private void setNoServerSnackbar()
+    {
+        mNoServerSnackbar = Snackbar
+                .make(mGridView, "No server response!", Snackbar.LENGTH_INDEFINITE)
+                .setAction("RETRY", new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View view)
+                    {
+                        mNoServerSnackbar.dismiss();
+                        mLoadSnackbar.show();
+                        setUpRequest(15, mPageCount * 15);
+                    }
+                });
+        mNoServerSnackbar.setActionTextColor(Color.RED);
+
+        View sbView = mNoServerSnackbar.getView();
+        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(Color.YELLOW);
+        mNoServerSnackbar.show();
+    }
+
+    private void setFullSnackbar()
+    {
+        mFullSnackbar = Snackbar.make(mGridView, "All Superheroes are shown!", Snackbar.LENGTH_SHORT);
+        Snackbar.SnackbarLayout snackbarView = (Snackbar.SnackbarLayout) mFullSnackbar.getView();
+        snackbarView.setBackgroundColor(ContextCompat.getColor(
+                MyApplication.getAppContext(), R.color.colorPrimaryDark));
+        mFullSnackbar.show();
+    }
 }

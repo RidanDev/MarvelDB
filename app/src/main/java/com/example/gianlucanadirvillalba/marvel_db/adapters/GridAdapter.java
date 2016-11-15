@@ -93,7 +93,6 @@ public class GridAdapter extends BaseAdapter
         //if (s.contains("/")) s = s.substring(0, s.indexOf("/"));
         if (s.length() > 13 ) s = s.substring(0, 13) + ".."; //13 senza il controllo delle parentesi
         holder.textView.setText(s);
-
         //holder.textView.setText(superHero.getName());
         String imagePath = superHero.getImagePath();
         if (imagePath != null)
@@ -110,6 +109,7 @@ public class GridAdapter extends BaseAdapter
                 @Override
                 public void onErrorResponse(VolleyError error)
                 {
+                    //TODO gestire immagine non trovata per evitare caricamento infinito
                     Toast.makeText(mContext, "No image for: " + superHero.getName(), Toast.LENGTH_LONG).show();
                 }
             });
