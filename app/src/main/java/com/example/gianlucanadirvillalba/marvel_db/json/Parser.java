@@ -59,8 +59,7 @@ public class Parser
 
                     imagePath = (String) currentCharacter.getJSONObject(KEY_THUMBNAIL).get(KEY_PATH);
                     comicsNumber = (int) currentCharacter.getJSONObject(KEY_COMICS).get(KEY_AVAILABLE);
-                    //TODO posso creare un impostazione per decidere se visualizzare anche i personaggi che non hanno un immagine, che di default non mostro o quelli con comicsNum = 0
-
+                    //TODO potrei decidere di elminare tutti i personaggi di tipo "Ultimate"
                     if (!(imagePath.equals(Constants.IMAGE_NOT_FOUND_1)
                             || imagePath.equals(Constants.IMAGE_NOT_FOUND_2)
                             || comicsNumber == 0))

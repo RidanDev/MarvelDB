@@ -11,10 +11,14 @@ public class SuperHero
     private long id;
     private int comicsNumber;
 
+    public long getId() {return id;}
+
     public String getName()
     {
         return name;
     }
+
+    public String getDescription() {return description;}
 
     public String getImagePath() {return imagePath;}
 

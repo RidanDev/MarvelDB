@@ -8,31 +8,28 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
 import com.example.gianlucanadirvillalba.marvel_db.R;
-import com.example.gianlucanadirvillalba.marvel_db.network.VolleySingleton;
+import com.example.gianlucanadirvillalba.marvel_db.extras.MyApplication;
 import com.example.gianlucanadirvillalba.marvel_db.pojo.SuperHero;
+import com.squareup.picasso.Picasso;
 
 import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by gianlucanadirvillalba on 09/11/2016.
+ * <p>
+ * Il funzionamento è come quello del GridAdapter (guardare javadoc)
  */
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.CharactersHolder>
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.CharactersHolder>
 {
     private LayoutInflater mLayoutInflater;
     private List<SuperHero> data = Collections.emptyList();
-    private ImageLoader imageLoader;
-    private VolleySingleton volleySingleton;
 
-    public ListAdapter(Context context)
+    public RecyclerAdapter(Context context)
     {
         mLayoutInflater = mLayoutInflater.from(context);
-        volleySingleton = VolleySingleton.getInstance();
-        imageLoader = volleySingleton.getImageLoader();
     }
 
     public void setData(List<SuperHero> data)
@@ -41,10 +38,17 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.CharactersHold
         notifyItemRangeChanged(0, data.size());
     }
 
+    public void addNewData(List<SuperHero> newData)
+    {
+        for (int i = 0; i < newData.size(); i++)
+            data.add(newData.get(i));
+        notifyDataSetChanged();
+    }
+
     @Override
     public CharactersHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
-        View view = mLayoutInflater.inflate(R.layout.custom_character, parent, false);
+        View view = mLayoutInflater.inflate(R.layout.custom_grid_character, parent, false);
         CharactersHolder charactersHolder = new CharactersHolder(view);
         return charactersHolder;
     }
@@ -57,20 +61,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.CharactersHold
         String imagePath = superHero.getImagePath();
         if (imagePath != null)
         {
-            imageLoader.get(imagePath, new ImageLoader.ImageListener()
-            {
-                @Override
-                public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate)
-                {
-                    holder.imageView.setImageBitmap(response.getBitmap());
-                }
-
-                @Override
-                public void onErrorResponse(VolleyError error)
-                {
-
-                }
-            });
+            Picasso.with(MyApplication.getAppContext())
+                    .load(imagePath)
+                    .noFade()
+                    .into(holder.imageView);
         }
     }
 
@@ -88,8 +82,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.CharactersHold
         public CharactersHolder(View itemView)
         {
             super(itemView);
-            textView = (TextView) itemView.findViewById(R.id.characterName);
-            imageView = (ImageView) itemView.findViewById(R.id.characterImage);
+            textView = (TextView) itemView.findViewById(R.id.character_grid_name);
+            imageView = (ImageView) itemView.findViewById(R.id.character_grid_image);
         }
     }
 }

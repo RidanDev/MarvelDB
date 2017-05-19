@@ -20,6 +20,20 @@ import java.util.List;
 
 /**
  * Created by gianlucanadirvillalba on 11/11/2016.
+ *
+ * NON SFRUTTA IL RIUTILIZZO DELLE VISTE!!!(NO RECYCLER)
+ * Il GridAdapter è l'Adapter che si occupa di prelevare dei dati e rappresentarli
+ * in ogni custom_grid_character della GridView.
+ * La GridView è solamente la View che rappresenta i miei characters e che è in attesa
+ * di prendere in input un Adapter per poter legare i dati con la parte grafica
+ * Devo quindi riempire la custom_grid_character che viene quindi passata in input al ViewHolder
+ * attraverso il metodo getView
+ * Il ViewHolder prende le singole View (ImageView e TextView) in cui rappresentare i dati
+ * prelevati all'interno della lista "data"
+ * la lista "data" viene riempita subito attraverso il metodo setData con i dati ottenuti
+ * dal metodo setUpRequest chiamato nel MainActivity.
+ * la lista "data" viene riempita a tempo di esecuzione attraverso il metodo addNewData
+ * ogni volta che scrollo la GridView
  */
 
 public class GridAdapter extends BaseAdapter
@@ -87,17 +101,19 @@ public class GridAdapter extends BaseAdapter
             holder = (ViewHolder) myView.getTag();
         }
         final SuperHero superHero = data.get(i);
-        //TODO controllo stringa da ottimizzare
         String s = superHero.getName();
         //if (s.contains("(")) s = s.substring(0, s.indexOf("("));
         //if (s.contains("/")) s = s.substring(0, s.indexOf("/"));
-        if (s.length() > 13 ) s = s.substring(0, 13) + ".."; //13 senza il controllo delle parentesi
         holder.textView.setText(s);
         //holder.textView.setText(superHero.getName());
         String imagePath = superHero.getImagePath();
         if (imagePath != null)
         {
             final ViewHolder finalHolder = holder;
+//            Picasso.with(MyApplication.getAppContext())
+//                    .load(imagePath)
+//                    .noFade()
+//                    .into(holder.imageView);
             imageLoader.get(imagePath, new ImageLoader.ImageListener()
             {
                 @Override
