@@ -11,6 +11,7 @@ public class Keys
     {
         String KEY_DATA = "data";
         String KEY_CHARACTERS = "results";
+        String KEY_WIKI = "wiki";
         String KEY_ID = "id";
         String KEY_NAME = "name";
         String KEY_DESCRIPTION = "description";
@@ -19,6 +20,9 @@ public class Keys
         String KEY_EXTENSION = "extension";
         String KEY_COMICS = "comics";
         String KEY_AVAILABLE = "available";
+        String KEY_UNIVERSE_WIKI = "universe";
+        String KEY_BIO_TEXT_WIKI = "bio_text";
+        String KEY_BIO_WIKI = "bio";
 
     }
 }

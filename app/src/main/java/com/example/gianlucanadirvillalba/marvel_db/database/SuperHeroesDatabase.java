@@ -31,7 +31,7 @@ public class SuperHeroesDatabase
         total = 0;
     }
 
-    public void insertMovies(ArrayList<SuperHero> list, boolean clearPrevious)
+    public void insertSuperHeroes(ArrayList<SuperHero> list, boolean clearPrevious)
     {
         if (clearPrevious) deleteSuperheroes();
 

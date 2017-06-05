@@ -25,6 +25,8 @@ import static com.example.gianlucanadirvillalba.marvel_db.extras.Keys.EndPointsS
 
 /**
  * Created by gianlucanadirvillalba on 10/11/2016.
+ *
+ * Parser dei json presi da marvel.com utilizzando le API
  */
 
 public class Parser
@@ -60,17 +62,27 @@ public class Parser
                     imagePath = (String) currentCharacter.getJSONObject(KEY_THUMBNAIL).get(KEY_PATH);
                     comicsNumber = (int) currentCharacter.getJSONObject(KEY_COMICS).get(KEY_AVAILABLE);
                     //TODO potrei decidere di elminare tutti i personaggi di tipo "Ultimate"
-                    if (!(imagePath.equals(Constants.IMAGE_NOT_FOUND_1)
-                            || imagePath.equals(Constants.IMAGE_NOT_FOUND_2)
-                            || comicsNumber == 0))
+/*                    if (imagePath.equals(Constants.IMAGE_NOT_FOUND_1) || imagePath.equals(Constants.IMAGE_NOT_FOUND_2))
                     {
                         imageType = Constants.DOT + (String) currentCharacter.getJSONObject(KEY_THUMBNAIL).get(KEY_EXTENSION);
-
+                        Log.d("TAG", "Image Path: "+ imagePath + Constants.PORTRAIT_FANTASTIC + imageType);
+                    }*/
+                    if (!(imagePath.equals(Constants.IMAGE_NOT_FOUND_1)
+                            || imagePath.equals(Constants.IMAGE_NOT_FOUND_2)
+                            || comicsNumber == 0
+                            || name.contains(Constants.ULTIMATE)
+                            || name.contains(Constants.HOUSE_OF_M)
+                            || name.contains(Constants.AGE_OF_APOCALYPSE)
+                            || name.contains(Constants.PET_AVENGERS)))
+                    {
+                        imageType = Constants.DOT + (String) currentCharacter.getJSONObject(KEY_THUMBNAIL).get(KEY_EXTENSION);
                         SuperHero superHero = new SuperHero();
                         superHero.setId(id);
                         superHero.setName(name);
                         superHero.setDescription(description);
-                        superHero.setImagePath(imagePath + Constants.PORTRAIT_FANTASTIC + imageType);
+                        superHero.setImagePath(imagePath + Constants.PORTRAIT_FANTASTIC + imageType); //grid
+                        //Log.d("TAG", "Image Path: "+ imagePath + Constants.PORTRAIT_FANTASTIC +imageType);
+                        //superHero.setImagePath(imagePath + Constants.PORTRAIT_UNCANNY + imageType);     //linear
                         superHero.setComicsNumber(comicsNumber);
 
                         //if (id != -1 && !name.equals("NA"))

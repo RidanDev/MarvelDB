@@ -3,6 +3,7 @@
           package="com.example.gianlucanadirvillalba.marvel_db">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".extras.MyApplication"
         android:allowBackup="true"
@@ -16,6 +17,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity android:name=".activities.SubActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.gianlucanadirvillalba.marvel_db.activities.MainActivity">
+            </meta-data>
         </activity>
     </application>
 

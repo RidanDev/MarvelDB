@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity
     private List<SuperHero> mCharactersList = new ArrayList<>();
     private RequestQueue mRequestQueue;
     private RecyclerAdapter mAdapter;
-    private Snackbar mLoadSnackbar;
+    public static Snackbar mLoadSnackbar;
     private Snackbar mNoServerSnackbar;
     private Snackbar mFullSnackbar;
     private int mPageCount;
@@ -53,9 +54,12 @@ public class MainActivity extends AppCompatActivity
     private int visibleItemCount;
     private int totalItemCount;
     private int pastVisibleItems;
-    private int limit = 100;
+    private static final int LIMIT = 100;
+    private TaskLoadCharacters mTaskLoadCharacters;
+    private LinearLayoutManager mLinearLayoutManager;
+    private List<String> mCharactersNamesList = new ArrayList<>();
 
-
+    //TODO il TaskLoadCharacters non può stare nell'onCreate altrimenti ogni volta me li ricarica (savedInstaceState?)
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -63,9 +67,10 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         mPageCount = 0;
         setUpDrawer();
-        setUpAsyncTask();
         setUpRecyclerView();
-        setUpRequest(limit, mPageCount);
+        //setUpAsyncTask();
+        //setUpRequest(LIMIT, mPageCount);
+        new TaskLoadCharacters(mAdapter).execute();
     }
 
     private void setUpDrawer()
@@ -76,11 +81,7 @@ public class MainActivity extends AppCompatActivity
         NavigationDrawerFragment navigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         navigationDrawerFragment.setUp(mToolbar, (DrawerLayout) findViewById(R.id.drawer_layout));
-    }
 
-    private void setUpAsyncTask()
-    {
-        new TaskLoadCharacters().execute();
     }
 
     //TODO potrei far decidere di mostrare i personaggi a lista o a griglia
@@ -90,7 +91,11 @@ public class MainActivity extends AppCompatActivity
         mRecyclerView = (RecyclerView) findViewById(R.id.charactersList);
         mGridLayoutManager = new GridLayoutManager(this, 3);
         mRecyclerView.setLayoutManager(mGridLayoutManager);
+        //mLinearLayoutManager = new LinearLayoutManager(this);
+        //mRecyclerView.setLayoutManager(mLinearLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+
+        /*mTaskLoadCharacters = new TaskLoadCharacters(mAdapter);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener()
         {
             @Override
@@ -107,21 +112,29 @@ public class MainActivity extends AppCompatActivity
                     visibleItemCount = mGridLayoutManager.getChildCount();
                     totalItemCount = mGridLayoutManager.getItemCount();
                     pastVisibleItems = mGridLayoutManager.findFirstVisibleItemPosition();
+                    //visibleItemCount = mLinearLayoutManager.getChildCount();
+                    //totalItemCount = mLinearLayoutManager.getItemCount();
+                    //pastVisibleItems = mLinearLayoutManager.findFirstVisibleItemPosition();
                     int total = visibleItemCount + pastVisibleItems;
                     if (total >= totalItemCount && isScrolled)
                     {
                         //Toast.makeText(MainActivity.this, "LAST ITEM", Toast.LENGTH_SHORT).show();
                         setLoadSnackbar();
                         if (mPageCount > 0) mLoadSnackbar.show();
-                        setUpRequest(limit, mPageCount * limit);
+                        setUpRequest(LIMIT, mPageCount * LIMIT);
                         isScrolled = false;
                     }
                 }
             }
-        });
+        });*/
         setLoadSnackbar();
         mLoadSnackbar.show();
     }
+
+    /*private void setUpAsyncTask()
+    {
+        new TaskLoadCharacters(mAdapter).execute();
+    }*/
 
     private void setUpRequest(int limit, int offset)
     {
@@ -160,6 +173,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onErrorResponse(VolleyError error)
             {
+                Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
                 mLoadSnackbar.dismiss();
                 setNoServerSnackbar();
             }
@@ -213,7 +227,7 @@ public class MainActivity extends AppCompatActivity
                     {
                         mNoServerSnackbar.dismiss();
                         mLoadSnackbar.show();
-                        setUpRequest(limit, mPageCount * limit);
+                        setUpRequest(LIMIT, mPageCount * LIMIT);
                     }
                 });
         mNoServerSnackbar.setActionTextColor(Color.RED);
