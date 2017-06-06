@@ -1,7 +1,5 @@
 package com.example.gianlucanadirvillalba.marvel_db.json;
 
-import android.util.Log;
-
 import com.example.gianlucanadirvillalba.marvel_db.extras.Constants;
 import com.example.gianlucanadirvillalba.marvel_db.pojo.SuperHero;
 
@@ -28,7 +26,6 @@ public class Parser3
     {
         try
         {
-            //TODO pensare se conviene prelevare il campo mainColor
             String recordName = Constants.NA;
             String recordDescription = Constants.NA;
             String recordImagePath = Constants.NA;
@@ -111,7 +108,7 @@ public class Parser3
                 superHero.setRecordTeams(recordTeams);
                 superHero.setRecordBackground(recordBackground);
 
-                if(superHero.getName().equals("Iron Man"))
+                /*if(superHero.getName().equals("Iron Man"))
                 {
                     for(String aliases : superHero.getRecordAliases())
                         Log.d("TAG", "alias: " + aliases);
@@ -130,7 +127,7 @@ public class Parser3
                     Log.d("TAG", "mainColor: " + superHero.getRecordMainColor());
                     Log.d("TAG", "superName: " + superHero.getRecordSuperName());
                     Log.d("TAG", "background: " + superHero.getRecordBackground());
-                }
+                }*/
                 marvelSearchList.add(superHero);
             }
 

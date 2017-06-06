@@ -21,8 +21,43 @@ public class SubActivity extends AppCompatActivity
         //getSupportActionBar().setHomeButtonEnabled(true);
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        String bio = getIntent().getStringExtra("bio");
-        TextView textView = (TextView) findViewById(R.id.bio_superhero);
-        textView.setText(bio);
+        String name = getIntent().getStringExtra("name");
+        String powers = getIntent().getStringExtra("powers");
+        String realName = getIntent().getStringExtra("realName");
+        String identity = getIntent().getStringExtra("identity");
+        String cityzenship = getIntent().getStringExtra("cityzenship");
+        String placeOfBird = getIntent().getStringExtra("placeOfBird");
+        String education = getIntent().getStringExtra("education");
+        String height = getIntent().getStringExtra("height");
+        String weight = getIntent().getStringExtra("weight");
+        String eyes = getIntent().getStringExtra("eyes");
+        String hair= getIntent().getStringExtra("hair");
+
+
+        //TextView textView = (TextView) findViewById(R.id.bio_superhero);
+        TextView textName = (TextView) findViewById(R.id.name);
+        TextView textRealName = (TextView) findViewById(R.id.real_name);
+        TextView textIdentity = (TextView) findViewById(R.id.identity);
+        TextView textCitizenship = (TextView) findViewById(R.id.citizenship);
+        TextView textPlaceOfBird = (TextView) findViewById(R.id.place_of_bird);
+        TextView textEducation = (TextView) findViewById(R.id.education);
+        TextView textHeight = (TextView) findViewById(R.id.height);
+        TextView textWeight = (TextView) findViewById(R.id.weight);
+        TextView textEyes = (TextView) findViewById(R.id.eyes);
+        TextView textHair = (TextView) findViewById(R.id.hair);
+        TextView textPowers = (TextView) findViewById(R.id.powers);
+
+
+        textName.setText(name);
+        textRealName.setText(realName);
+        textIdentity.setText(identity);
+        textCitizenship.setText(cityzenship);
+        textPlaceOfBird.setText(placeOfBird);
+        textEducation.setText(education);
+        textHeight.setText(height);
+        textWeight.setText(weight);
+        textEyes.setText(eyes);
+        textHair.setText(hair);
+        textPowers.setText(powers);
     }
 }

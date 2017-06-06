@@ -18,6 +18,7 @@ import com.example.gianlucanadirvillalba.marvel_db.extras.MyApplication;
 import com.example.gianlucanadirvillalba.marvel_db.pojo.SuperHero;
 import com.squareup.picasso.Picasso;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -111,7 +112,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Charac
         public void onClick(View view)
         {
             Intent intent = new Intent(mContext, SubActivity.class);
-            intent.putExtra("bio", data.get(getAdapterPosition()).getBioWiki());
+            intent.putExtra("name", data.get(getAdapterPosition()).getName());
+            intent.putExtra("realName", data.get(getAdapterPosition()).getRealNameWiki());
+            intent.putExtra("identity", data.get(getAdapterPosition()).getIdentityWiki());
+            intent.putExtra("cityzenship", data.get(getAdapterPosition()).getCitizenshipWiki());
+            intent.putExtra("placeOfBird", data.get(getAdapterPosition()).getPlaceOfBirthWiki());
+            intent.putExtra("education", data.get(getAdapterPosition()).getEducationWiki());
+            intent.putExtra("height", data.get(getAdapterPosition()).getHeightWiki());
+            intent.putExtra("weight", data.get(getAdapterPosition()).getWeightWiki());
+            intent.putExtra("eyes", data.get(getAdapterPosition()).getEyesWiki());
+            intent.putExtra("hair", data.get(getAdapterPosition()).getHairWiki());
+            intent.putExtra("powers", String.valueOf(Arrays.asList(data.get(getAdapterPosition()).getRecordPowers())));
             mContext.startActivity(intent);
         }
     }

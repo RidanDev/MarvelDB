@@ -81,6 +81,7 @@ public class TaskLoadCharacters extends AsyncTask<Void, Void, ArrayList<SuperHer
                 if (Parser2.charactersList.get(i).getName().equals(name))
                     superHeroesSortedByName.add(Parser2.charactersList.get(i));
         }
+
         return superHeroesSortedByName; //ordinati
         //return Parser3.marvelSearchList;
     }
@@ -88,7 +89,7 @@ public class TaskLoadCharacters extends AsyncTask<Void, Void, ArrayList<SuperHer
     @Override
     protected void onPostExecute(ArrayList<SuperHero> superHeroes)
     {
-        //if (myComponent != null)
+        //f (myComponent != null)
         //   myComponent.onAddSuperHeroes(superHeroes);
         new TaskLoadCharacters2(superHeroesSortedByName, myComponent).execute();
     }

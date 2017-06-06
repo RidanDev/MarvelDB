@@ -1,6 +1,7 @@
 package com.example.gianlucanadirvillalba.marvel_db.task;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.example.gianlucanadirvillalba.marvel_db.Interfaces.SuperHeroesListener;
 import com.example.gianlucanadirvillalba.marvel_db.extras.MyApplication;
@@ -10,10 +11,8 @@ import com.example.gianlucanadirvillalba.marvel_db.pojo.SuperHero;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
@@ -83,12 +82,74 @@ public class TaskLoadCharacters2 extends AsyncTask<Void, Void, ArrayList<SuperHe
         {
             for (int j = 0; j < superHeroesSortedByName.size(); j++)
             {
-                if (Parser3.marvelSearchList.get(i).getName().equals(superHeroesSortedByName.get(j).getName()))
+                if (Parser3.marvelSearchList.get(i).getName().equals(superHeroesSortedByName.get(j).getName())
+                        || Parser3.marvelSearchList.get(i).getName().equals(superHeroesSortedByName.get(j).getRealNameWiki())
+                        || Parser3.marvelSearchList.get(i).getRecordSuperName().equals(superHeroesSortedByName.get(j).getName())
+                        || Parser3.marvelSearchList.get(i).getRecordSuperName().equals(superHeroesSortedByName.get(j).getRealNameWiki()))
                 {
-                    contains = true;
                     //aggiungo i nuovi campi al superhero
+                    contains = true;
+                    superHeroesSortedByName.get(j).setRecordAliases(Parser3.marvelSearchList.get(i).getRecordAliases());
+                    superHeroesSortedByName.get(j).setRecordAuthors(Parser3.marvelSearchList.get(i).getRecordAuthors());
+                    superHeroesSortedByName.get(j).setRecordDescription(Parser3.marvelSearchList.get(i).getRecordDescription());
+                    superHeroesSortedByName.get(j).setRecordBackground(Parser3.marvelSearchList.get(i).getRecordBackground());
+                    superHeroesSortedByName.get(j).setRecordImagePath(Parser3.marvelSearchList.get(i).getRecordImagePath());
+                    superHeroesSortedByName.get(j).setRecordMainColor(Parser3.marvelSearchList.get(i).getRecordMainColor());
+                    superHeroesSortedByName.get(j).setRecordPartners(Parser3.marvelSearchList.get(i).getRecordPartners());
+                    superHeroesSortedByName.get(j).setRecordPowers(Parser3.marvelSearchList.get(i).getRecordPowers());
+                    superHeroesSortedByName.get(j).setRecordSecretIdentities(Parser3.marvelSearchList.get(i).getRecordSecretIdentities());
+                    superHeroesSortedByName.get(j).setRecordSpecies(Parser3.marvelSearchList.get(i).getRecordSpecies());
+                    superHeroesSortedByName.get(j).setRecordSuperName(Parser3.marvelSearchList.get(i).getRecordSuperName());
+                    superHeroesSortedByName.get(j).setRecordTeams(Parser3.marvelSearchList.get(i).getRecordTeams());
+
                     break;
                 }
+                else if(!contains)
+                {
+                    for(String secretIdentity : Parser3.marvelSearchList.get(i).getRecordSecretIdentities())
+                    {
+                        if(secretIdentity.equals(superHeroesSortedByName.get(j).getName()))
+                        {
+                            //aggiungo i nuovi campi al superhero
+                            contains = true;
+                            superHeroesSortedByName.get(j).setRecordAliases(Parser3.marvelSearchList.get(i).getRecordAliases());
+                            superHeroesSortedByName.get(j).setRecordAuthors(Parser3.marvelSearchList.get(i).getRecordAuthors());
+                            superHeroesSortedByName.get(j).setRecordDescription(Parser3.marvelSearchList.get(i).getRecordDescription());
+                            superHeroesSortedByName.get(j).setRecordBackground(Parser3.marvelSearchList.get(i).getRecordBackground());
+                            superHeroesSortedByName.get(j).setRecordImagePath(Parser3.marvelSearchList.get(i).getRecordImagePath());
+                            superHeroesSortedByName.get(j).setRecordMainColor(Parser3.marvelSearchList.get(i).getRecordMainColor());
+                            superHeroesSortedByName.get(j).setRecordPartners(Parser3.marvelSearchList.get(i).getRecordPartners());
+                            superHeroesSortedByName.get(j).setRecordPowers(Parser3.marvelSearchList.get(i).getRecordPowers());
+                            superHeroesSortedByName.get(j).setRecordSecretIdentities(Parser3.marvelSearchList.get(i).getRecordSecretIdentities());
+                            superHeroesSortedByName.get(j).setRecordSpecies(Parser3.marvelSearchList.get(i).getRecordSpecies());
+                            superHeroesSortedByName.get(j).setRecordSuperName(Parser3.marvelSearchList.get(i).getRecordSuperName());
+                            superHeroesSortedByName.get(j).setRecordTeams(Parser3.marvelSearchList.get(i).getRecordTeams());
+                            break;
+                        }
+                    }
+                    for(String secretIdentity : Parser3.marvelSearchList.get(i).getRecordSecretIdentities())
+                    {
+                        if(secretIdentity.equals(superHeroesSortedByName.get(j).getRealNameWiki()))
+                        {
+                            //aggiungo i nuovi campi al superhero
+                            contains = true;
+                            superHeroesSortedByName.get(j).setRecordAliases(Parser3.marvelSearchList.get(i).getRecordAliases());
+                            superHeroesSortedByName.get(j).setRecordAuthors(Parser3.marvelSearchList.get(i).getRecordAuthors());
+                            superHeroesSortedByName.get(j).setRecordDescription(Parser3.marvelSearchList.get(i).getRecordDescription());
+                            superHeroesSortedByName.get(j).setRecordBackground(Parser3.marvelSearchList.get(i).getRecordBackground());
+                            superHeroesSortedByName.get(j).setRecordImagePath(Parser3.marvelSearchList.get(i).getRecordImagePath());
+                            superHeroesSortedByName.get(j).setRecordMainColor(Parser3.marvelSearchList.get(i).getRecordMainColor());
+                            superHeroesSortedByName.get(j).setRecordPartners(Parser3.marvelSearchList.get(i).getRecordPartners());
+                            superHeroesSortedByName.get(j).setRecordPowers(Parser3.marvelSearchList.get(i).getRecordPowers());
+                            superHeroesSortedByName.get(j).setRecordSecretIdentities(Parser3.marvelSearchList.get(i).getRecordSecretIdentities());
+                            superHeroesSortedByName.get(j).setRecordSpecies(Parser3.marvelSearchList.get(i).getRecordSpecies());
+                            superHeroesSortedByName.get(j).setRecordSuperName(Parser3.marvelSearchList.get(i).getRecordSuperName());
+                            superHeroesSortedByName.get(j).setRecordTeams(Parser3.marvelSearchList.get(i).getRecordTeams());
+                            break;
+                        }
+                    }
+                }
+                if(contains) break;
             }
             //mi salvo il superhero mancante
             if (!contains)
@@ -102,13 +163,17 @@ public class TaskLoadCharacters2 extends AsyncTask<Void, Void, ArrayList<SuperHe
         }
         /*Log.d("TAG", "new_number: " + newCharacters.size());
         for (SuperHero superHero : newCharacters)
-            Log.d("TAG", "new: " + superHero.getName() +
-                    ", " + superHero.getPageViewCount());*/
+            Log.d("TAG", "new: " + superHero.getName());*/
+        for(SuperHero superHero : superHeroesSortedByName)
+        {
+            if(superHero.getName().equals("Deadpool"))
+                Log.d("TAG", superHero.toString());
+        }
 
 
         /*LEGGO IL TXT CON I NOMI DEI PERSONAGGI, PRELEVO LE ISTANZE SUPERHERO CORRISPONDENTI E LE
         AGGIUNGO NELLA LISTA DI SUPERHERO CHE HO. ORDINO IL TUTTO PER NOME E LI AGGIUNGO IN UNA LISTA FINALE*/
-        BufferedReader reader = null;
+      /*  BufferedReader reader = null;
         try
         {
             reader = new BufferedReader(
@@ -148,16 +213,18 @@ public class TaskLoadCharacters2 extends AsyncTask<Void, Void, ArrayList<SuperHe
             for (int i = 0; i < superHeroesSortedByName.size(); i++)
                 if (superHeroesSortedByName.get(i).getName().equals(name))
                     finalCharacters.add(superHeroesSortedByName.get(i));
-        }
+        }*/
 
         //return Parser3.marvelSearchList;
-        return newCharacters;
+        //return newCharacters;
+        return superHeroesSortedByName;
     }
 
     @Override
     protected void onPostExecute(ArrayList<SuperHero> superHeroes)
     {
         if (myComponent != null)
-            myComponent.onAddSuperHeroes(finalCharacters);
+            //myComponent.onAddSuperHeroes(finalCharacters);
+            myComponent.onAddSuperHeroes(superHeroes);
     }
 }
