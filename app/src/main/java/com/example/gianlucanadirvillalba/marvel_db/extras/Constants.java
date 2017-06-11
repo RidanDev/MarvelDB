@@ -17,5 +17,6 @@ public class Constants
     public static final String PET_AVENGERS = "Pet Avengers";
     public static final String WEAPON_OMEGA = "Weapon Omega";
     public static final String NA = "NA";
+    public static final String NONE = "None";
     public static final int NULL_INT = -1;
 }

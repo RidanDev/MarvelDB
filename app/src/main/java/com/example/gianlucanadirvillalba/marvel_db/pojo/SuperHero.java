@@ -1,5 +1,7 @@
 package com.example.gianlucanadirvillalba.marvel_db.pojo;
 
+import android.widget.ImageView;
+
 import com.example.gianlucanadirvillalba.marvel_db.extras.Constants;
 
 import java.util.ArrayList;
@@ -54,6 +56,7 @@ public class SuperHero
     private String originWiki;
     private String significantIssuesWiki;
     private ArrayList<String> categoriesWiki = new ArrayList<>();
+    private ImageView imageView;
 
 
     @Override
@@ -589,4 +592,11 @@ public class SuperHero
     {
         this.categoriesWiki = categoriesWiki;
     }
+
+    public void setImageView(ImageView imageView)
+    {
+        this.imageView = imageView;
+    }
+
+    public ImageView getImageView() {return imageView;}
 }

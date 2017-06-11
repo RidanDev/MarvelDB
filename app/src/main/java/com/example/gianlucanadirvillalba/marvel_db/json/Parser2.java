@@ -153,6 +153,8 @@ public class Parser2
                 superHero.setId(id);
                 superHero.setName(name);
                 superHero.setDescription(description);
+                //if (superHero.getName().equals("Alpha Flight)")) {}
+
                 if (superHero.getName().equals("Kylun"))
                     superHero.setImagePath(imagePath + Constants.PORTRAIT_UNCANNY + imageType);
                 else superHero.setImagePath(imagePath + Constants.PORTRAIT_FANTASTIC + imageType);

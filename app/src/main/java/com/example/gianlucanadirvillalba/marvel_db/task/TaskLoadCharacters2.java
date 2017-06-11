@@ -1,7 +1,6 @@
 package com.example.gianlucanadirvillalba.marvel_db.task;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.example.gianlucanadirvillalba.marvel_db.Interfaces.SuperHeroesListener;
 import com.example.gianlucanadirvillalba.marvel_db.extras.MyApplication;
@@ -18,7 +17,7 @@ import java.util.TreeSet;
 
 /**
  * Created by gianlucanadirvillalba on 30/05/2017.
- *
+ * <p>
  * Questo Thread viene chiamato al termine del TaskLoadCharacters per iterare sui json in assets/records
  * e passarli al Parser3. Al termine del ciclo avrò una lista di superheroes che confronterò con quelli
  * del TaskLoadCharacters per cercare i superheroes mancanti.
@@ -103,12 +102,11 @@ public class TaskLoadCharacters2 extends AsyncTask<Void, Void, ArrayList<SuperHe
                     superHeroesSortedByName.get(j).setRecordTeams(Parser3.marvelSearchList.get(i).getRecordTeams());
 
                     break;
-                }
-                else if(!contains)
+                } else if (!contains)
                 {
-                    for(String secretIdentity : Parser3.marvelSearchList.get(i).getRecordSecretIdentities())
+                    for (String secretIdentity : Parser3.marvelSearchList.get(i).getRecordSecretIdentities())
                     {
-                        if(secretIdentity.equals(superHeroesSortedByName.get(j).getName()))
+                        if (secretIdentity.equals(superHeroesSortedByName.get(j).getName()))
                         {
                             //aggiungo i nuovi campi al superhero
                             contains = true;
@@ -127,9 +125,9 @@ public class TaskLoadCharacters2 extends AsyncTask<Void, Void, ArrayList<SuperHe
                             break;
                         }
                     }
-                    for(String secretIdentity : Parser3.marvelSearchList.get(i).getRecordSecretIdentities())
+                    for (String secretIdentity : Parser3.marvelSearchList.get(i).getRecordSecretIdentities())
                     {
-                        if(secretIdentity.equals(superHeroesSortedByName.get(j).getRealNameWiki()))
+                        if (secretIdentity.equals(superHeroesSortedByName.get(j).getRealNameWiki()))
                         {
                             //aggiungo i nuovi campi al superhero
                             contains = true;
@@ -149,7 +147,7 @@ public class TaskLoadCharacters2 extends AsyncTask<Void, Void, ArrayList<SuperHe
                         }
                     }
                 }
-                if(contains) break;
+                if (contains) break;
             }
             //mi salvo il superhero mancante
             if (!contains)
@@ -164,11 +162,19 @@ public class TaskLoadCharacters2 extends AsyncTask<Void, Void, ArrayList<SuperHe
         /*Log.d("TAG", "new_number: " + newCharacters.size());
         for (SuperHero superHero : newCharacters)
             Log.d("TAG", "new: " + superHero.getName());*/
-        for(SuperHero superHero : superHeroesSortedByName)
+
+        /*for (SuperHero superHero : superHeroesSortedByName)
         {
-            if(superHero.getName().equals("Deadpool"))
-                Log.d("TAG", superHero.toString());
-        }
+            if (superHero.getName().equals("Armor (Hisako Ichiki)"))
+            {
+                //Log.d("TAG", superHero.toString());
+                Log.d("TAG", "name: " + superHero.getName());
+                Log.d("TAG", "Abilities: " + superHero.getAbilitiesWiki());
+                Log.d("TAG", "Weapons: " + superHero.getWeaponsWiki());
+                Log.d("TAG", "Paraphernalia: " + superHero.getParaphernaliaWiki());
+            }
+        }*/
+
 
 
         /*LEGGO IL TXT CON I NOMI DEI PERSONAGGI, PRELEVO LE ISTANZE SUPERHERO CORRISPONDENTI E LE

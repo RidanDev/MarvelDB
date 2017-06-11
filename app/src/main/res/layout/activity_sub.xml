@@ -12,287 +12,477 @@
         layout="@layout/app_bar"/>
 
     <ScrollView
+        android:id="@+id/parent_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/app_bar">
 
         <LinearLayout
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/name"
+            <RelativeLayout
+                android:id="@+id/header_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                android:paddingBottom="30dp"
-                android:text="Superhero name"
-                android:textAlignment="center"
-                android:textSize="12pt"/>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/name"
-                android:orientation="horizontal"
-                android:paddingBottom="20dp"
-                android:paddingLeft="10dp">
+                android:layout_marginBottom="16dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/name"
-                    android:paddingRight="20dp"
-                    android:text="RealName:"
-                    android:textSize="9pt"/>
-
-                <TextView
-                    android:id="@+id/real_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="real name"
-                    android:textSize="8pt"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/name"
-                android:orientation="horizontal"
-                android:paddingBottom="20dp"
-                android:paddingLeft="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/name"
-                    android:paddingRight="20dp"
-                    android:text="Identity:"
-                    android:textSize="9pt"/>
-
-                <TextView
-                    android:id="@+id/identity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="identity"
-                    android:textSize="8pt"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/name"
-                android:orientation="horizontal"
-                android:paddingBottom="20dp"
-                android:paddingLeft="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/name"
-                    android:paddingRight="20dp"
-                    android:text="Citizenship:"
-                    android:textSize="9pt"/>
-
-                <TextView
-                    android:id="@+id/citizenship"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Citizenship"
-                    android:textSize="8pt"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/name"
-                android:orientation="horizontal"
-                android:paddingBottom="20dp"
-                android:paddingLeft="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/name"
-                    android:paddingRight="20dp"
-                    android:text="Place of bird:"
-                    android:textSize="9pt"/>
-
-                <TextView
-                    android:id="@+id/place_of_bird"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Place of bird"
-                    android:textSize="8pt"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/name"
-                android:orientation="horizontal"
-                android:paddingBottom="20dp"
-                android:paddingLeft="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/name"
-                    android:paddingRight="20dp"
-                    android:text="Education:"
-                    android:textSize="9pt"/>
-
-                <TextView
-                    android:id="@+id/education"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Education"
-                    android:textSize="8pt"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/name"
-                android:orientation="horizontal"
-                android:paddingBottom="20dp"
-                android:paddingLeft="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/name"
-                    android:paddingRight="20dp"
-                    android:text="Height:"
-                    android:textSize="9pt"/>
-
-                <TextView
-                    android:id="@+id/height"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Height"
-                    android:textSize="8pt"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/name"
-                android:orientation="horizontal"
-                android:paddingBottom="20dp"
-                android:paddingLeft="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/name"
-                    android:paddingRight="20dp"
-                    android:text="Weight:"
-                    android:textSize="9pt"/>
-
-                <TextView
-                    android:id="@+id/weight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Weight"
-                    android:textSize="8pt"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="20dp"
-                android:paddingLeft="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingRight="20dp"
-                    android:text="Eyes:"
-                    android:textSize="9pt"/>
-
-                <TextView
-                    android:id="@+id/eyes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Eyes"
-                    android:textSize="8pt"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/name"
-                android:orientation="horizontal"
-                android:paddingBottom="20dp"
-                android:paddingLeft="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/name"
-                    android:paddingRight="20dp"
-                    android:text="Hair:"
-                    android:textSize="9pt"/>
-
-                <TextView
-                    android:id="@+id/hair"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Hair"
-                    android:textSize="8pt"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/name"
-                android:orientation="vertical"
-                android:paddingBottom="20dp"
-                android:paddingLeft="10dp">
-
-                <TextView
+                    android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:paddingBottom="16dp"
+                    android:text="Superhero name"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    android:textStyle="bold"/>
+
+                <ImageView
+                    android:id="@+id/character_image_icon"
+                    android:layout_width="160dp"
+                    android:layout_height="240dp"
                     android:layout_below="@+id/name"
-                    android:paddingRight="20dp"
-                    android:text="Powers"
-                    android:textSize="9pt"
-                    android:paddingBottom="10dp"
-                    android:gravity="center_horizontal"/>
+                    android:layout_centerHorizontal="true"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/ic_launcher"/>
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:id="@+id/blurb_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/blurb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="10"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:text="Blurb"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/secondary_text_size"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/biography_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <include
+                    layout="@layout/horizontal_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+
+                <TextView
+                    style="@style/MarvelDB.Text.Label"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:text="Biography"/>
+
+                <LinearLayout
+                    android:id="@+id/real_name_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="20dp"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin">
+
+                    <TextView
+                        android:layout_width="@dimen/label_width"
+                        android:layout_height="wrap_content"
+                        android:text="Real name:"
+                        android:textSize="@dimen/primary_text_size"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/real_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="real name"
+                        android:textSize="@dimen/primary_text_size"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/identity_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="20dp"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin">
+
+                    <TextView
+                        android:layout_width="@dimen/label_width"
+                        android:layout_height="wrap_content"
+                        android:text="Identity:"
+                        android:textSize="@dimen/primary_text_size"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/identity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="identity"
+                        android:textSize="@dimen/primary_text_size"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/citizenship_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="20dp"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin">
+
+                    <TextView
+                        android:layout_width="@dimen/label_width"
+                        android:layout_height="wrap_content"
+                        android:text="Citizenship:"
+                        android:textSize="@dimen/primary_text_size"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/citizenship"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Citizenship"
+                        android:textSize="@dimen/primary_text_size"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/place_of_birth_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="20dp"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin">
+
+                    <TextView
+                        android:layout_width="@dimen/label_width"
+                        android:layout_height="wrap_content"
+                        android:text="Place of birth:"
+                        android:textSize="@dimen/primary_text_size"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/place_of_birth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Place of birth"
+                        android:textSize="@dimen/primary_text_size"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/education_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="20dp"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin">
+
+                    <TextView
+                        android:layout_width="@dimen/label_width"
+                        android:layout_height="wrap_content"
+                        android:text="Education:"
+                        android:textSize="@dimen/primary_text_size"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/education"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Education"
+                        android:textSize="@dimen/primary_text_size"/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/appearance_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include
+                    layout="@layout/horizontal_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+
+                <TextView
+                    style="@style/MarvelDB.Text.Label"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:text="Appearance"/>
+
+                <LinearLayout
+                    android:id="@+id/height_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="20dp"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin">
+
+                    <TextView
+                        android:layout_width="@dimen/label_width"
+                        android:layout_height="wrap_content"
+                        android:text="Height:"
+                        android:textSize="@dimen/primary_text_size"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/height"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Height"
+                        android:textSize="@dimen/primary_text_size"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/weight_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="20dp"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin">
+
+                    <TextView
+                        android:layout_width="@dimen/label_width"
+                        android:layout_height="wrap_content"
+                        android:text="Weight:"
+                        android:textSize="@dimen/primary_text_size"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/weight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Weight"
+                        android:textSize="@dimen/primary_text_size"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/eyes_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="20dp"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin">
+
+                    <TextView
+                        android:layout_width="@dimen/label_width"
+                        android:layout_height="wrap_content"
+                        android:text="Eyes:"
+                        android:textSize="@dimen/primary_text_size"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/eyes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Eyes"
+                        android:textSize="@dimen/primary_text_size"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/hair_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="20dp"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin">
+
+                    <TextView
+                        android:layout_width="@dimen/label_width"
+                        android:layout_height="wrap_content"
+                        android:text="Hair:"
+                        android:textSize="@dimen/primary_text_size"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/hair"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hair"
+                        android:textSize="@dimen/primary_text_size"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/occupation_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical">
+
+                <include
+                    layout="@layout/horizontal_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+
+                <TextView
+                    style="@style/MarvelDB.Text.Label"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:text="Occupation"/>
+
+                <TextView
+                    android:id="@+id/occupation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="10"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:text="Occupation"
+                    android:textSize="@dimen/primary_text_size"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/abilities_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical">
+
+                <include
+                    layout="@layout/horizontal_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+
+                <TextView
+                    style="@style/MarvelDB.Text.Label"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:text="Abilities"/>
+
+                <TextView
+                    android:id="@+id/abilities"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="10"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:text="Abilities"
+                    android:textSize="@dimen/primary_text_size"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/weapons_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical">
+
+                <include
+                    layout="@layout/horizontal_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+
+                <TextView
+                    style="@style/MarvelDB.Text.Label"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:text="Weapons"/>
+
+                <TextView
+                    android:id="@+id/weapons"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="10"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:text="Weapons"
+                    android:textSize="@dimen/primary_text_size"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/paraphernalia_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical">
+
+                <include
+                    layout="@layout/horizontal_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+
+                <TextView
+                    style="@style/MarvelDB.Text.Label"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:text="Paraphernalia"/>
+
+                <TextView
+                    android:id="@+id/paraphernalia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="10"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:text="Paraphernalia"
+                    android:textSize="@dimen/primary_text_size"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/powers_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical">
+
+                <include
+                    layout="@layout/horizontal_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+
+                <TextView
+                    android:id="@+id/powers_label"
+                    style="@style/MarvelDB.Text.Label"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:text="Powers"/>
+
 
                 <TextView
                     android:id="@+id/powers"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="10"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:scrollbars="vertical"
                     android:text="Powers"
-                    android:gravity="center_horizontal"
-                    android:textSize="8pt"/>
+                    android:textSize="@dimen/primary_text_size"/>
+
+
             </LinearLayout>
 
 
-            <!--TextView
-                android:id="@+id/power_title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/real_name_layout"
-                android:text="Powers"
-                android:textAlignment="center"
-                android:textSize="9pt"/>
-
-            <TextView
-                android:id="@+id/powers"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/power_title"
-                android:layout_margin="10dp"
-                android:text="superheroes bio"
-                android:textAlignment="center"
-                android:textSize="7pt"/-->
         </LinearLayout>
 
     </ScrollView>

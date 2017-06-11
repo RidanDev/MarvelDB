@@ -56,4 +56,14 @@ public class MyApplication extends Application
             return false;
         }
     }
+
+    public static boolean notEmptyNA(String text)
+    {
+        return (!text.equalsIgnoreCase(Constants.NA)
+                && !text.isEmpty()
+                && !text.equalsIgnoreCase(Constants.NONE)
+                && !text.equalsIgnoreCase("N/A")
+                && !text.equalsIgnoreCase("None.")
+                && !text.equalsIgnoreCase("None (child)"));
+    }
 }

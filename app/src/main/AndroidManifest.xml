@@ -24,6 +24,8 @@
                 android:value="com.example.gianlucanadirvillalba.marvel_db.activities.MainActivity">
             </meta-data>
         </activity>
+        <activity android:name=".activities.DisplayActivity">
+        </activity>
     </application>
 
 </manifest>
